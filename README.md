@@ -1,4 +1,4 @@
-# Web to Markdown
+# Web2Markdown
 
 A Python library for crawling web pages and converting them to markdown format. This tool helps you easily convert web documentation, blogs, or any web content into clean markdown files while preserving the content structure.
 
@@ -14,7 +14,7 @@ A Python library for crawling web pages and converting them to markdown format. 
 ## Installation
 
 ```bash
-pip install web-to-markdown
+pip install web2markdown
 ```
 
 ## Usage
@@ -23,19 +23,19 @@ pip install web-to-markdown
 
 ```bash
 # Basic usage
-web-to-markdown -u https://example.com/docs -o output.md
+web2markdown -u https://example.com/docs -o output.md
 
 # Specify crawl depth
-web-to-markdown -u https://example.com/docs -d 2 -o output.md
+web2markdown -u https://example.com/docs -d 2 -o output.md
 
 # Enable verbose logging
-web-to-markdown -u https://example.com/docs -v
+web2markdown -u https://example.com/docs -v
 ```
 
 ### Python API
 
 ```python
-from web_to_markdown import WebCrawler, MarkdownConverter
+from web2markdown import WebCrawler, MarkdownConverter
 
 # Initialize crawler
 crawler = WebCrawler(base_url="https://example.com/docs", max_depth=3)

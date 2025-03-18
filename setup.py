@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="web-to-markdown",
+    name="web2markdown",
     version="0.1.0",
     author="Roger Koa",
     description="A Python library for crawling web pages and converting them to markdown format",
@@ -34,7 +34,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "web-to-markdown=web_to_markdown.cli:main",
+            "web2markdown=web2markdown.cli:main",
         ],
     },
 )

@@ -3,7 +3,7 @@ requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "web-to-markdown"
+name = "web2markdown"
 version = "0.1.0"
 description = "A Python library for crawling web pages and converting them to markdown format"
 readme = "README.md"
@@ -27,5 +27,5 @@ classifiers = [
 dynamic = ["dependencies", "scripts"]
 
 [project.urls]
-Homepage = "https://github.com/roger_koa/web-to-markdown"
-Repository = "https://github.com/roger_koa/web-to-markdown.git"
+Homepage = "https://github.com/roger_koa/web2markdown"
+Repository = "https://github.com/roger_koa/web2markdown.git"
