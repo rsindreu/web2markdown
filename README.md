@@ -60,12 +60,11 @@ converter.save_markdown(markdown_content, "output.md")
 
 ## Dependencies
 
-- beautifulsoup4
-- requests
-- urllib3
-- markdown
-- readability-lxml
-- html2text
+- beautifulsoup4>=4.12.0
+- requests>=2.31.0
+- urllib3>=2.1.0
+- markdown>=3.5.0
+- trafilatura>=0.8.1
 
 ## License
 

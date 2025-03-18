@@ -29,9 +29,16 @@ setup(
         "requests>=2.31.0",
         "urllib3>=2.1.0",
         "markdown>=3.5.0",
-        "readability-lxml>=0.8.1",
-        "html2text>=2020.1.16"
+        "trafilatura>=0.8.1",
     ],
+    extras_require={
+        'test': [
+            'pytest>=7.4.0',
+            'pytest-cov>=4.1.0',
+            'pytest-mock>=3.11.1',
+        ],
+    },
+    test_suite='tests',
     entry_points={
         "console_scripts": [
             "web2markdown=web2markdown.cli:main",
