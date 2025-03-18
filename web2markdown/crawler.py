@@ -32,11 +32,28 @@ class WebCrawler:
     def get_page_content(self, url: str) -> Optional[Dict]:
         """Fetch and parse a single page using trafilatura for smart content extraction."""
         try:
-            # Download and extract content
-            downloaded = trafilatura.fetch_url(url)
-            if downloaded is None:
-                logger.warning(f"Could not fetch content from {url}")
-                return None
+            # Set up headers to mimic a browser
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1',
+                'Sec-Fetch-Dest': 'document',
+                'Sec-Fetch-Mode': 'navigate',
+                'Sec-Fetch-Site': 'none',
+                'Sec-Fetch-User': '?1',
+                'Cache-Control': 'max-age=0'
+            }
+            
+            # Download content using requests
+            try:
+                response = requests.get(url, headers=headers, timeout=10, stream=True) # Use stream=True
+                response.raise_for_status()
+                downloaded_bytes = response.content # Get the raw bytes
+                downloaded = downloaded_bytes.decode(response.apparent_encoding) # Use apparent encoding
+            except Exception as e:
+                logger.error(f"Failed to fetch {url}: {str(e)}")
                 
             # Extract the main content and metadata
             content = trafilatura.extract(
