@@ -1,12 +1,14 @@
 # Web2Markdown
 
-A Python library for crawling web pages and converting them to markdown format. This tool helps you easily convert web documentation, blogs, or any web content into clean markdown files while preserving the content structure.
+By Roger Sindreu
+
+A Python library for crawling web pages and converting them to markdown format. This tool is particularly useful for creating context files for Large Language Models (LLMs), especially when working with new AI frameworks or technologies where documentation is constantly evolving. It helps you easily convert web documentation, blogs, or any web content into clean markdown files while preserving the content structure.
 
 ## Features
 
 - Depth-limited web crawling
 - Domain/path boundary respect
-- Smart content extraction using readability-lxml
+- Smart content extraction using trafilatura
 - Clean HTML to Markdown conversion
 - Metadata extraction
 - Command-line interface with configurable options
@@ -49,6 +51,53 @@ markdown_content = converter.convert_to_markdown(pages)
 
 # Save the result
 converter.save_markdown(markdown_content, "output.md")
+```
+
+### Using with LLMs through the UI
+
+You can use Web2Markdown by manually downloading the documentation pages as markdown and then manually attaching them to your conversation with the LLM.
+
+
+### Using with LLMs (Programmatically)
+
+Web2Markdown is particularly valuable when you need to provide up-to-date context to LLMs about new frameworks or technologies. Here's how you can use it with popular LLM APIs:
+
+```python
+from web2markdown import WebCrawler, MarkdownConverter
+from openai import OpenAI  # or import google.generativeai as genai
+
+# Download latest documentation
+crawler = WebCrawler("https://python.langchain.com/docs/expression_language/", max_depth=2)
+pages = crawler.crawl()
+
+converter = MarkdownConverter()
+markdown_content = converter.convert_to_markdown(pages)
+converter.save_markdown(markdown_content, "langgraph.md")
+
+# Use with OpenAI
+client = OpenAI()
+with open("langgraph.md", "r") as f:
+    context = f.read()
+
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "You are an AI expert. Use the context provided to answer questions."},
+        {"role": "user", "content": f"Context: {context}\n\nQuestion: How do I create a simple LangGraph?"}]
+)
+
+# Or use with Google's Gemini
+'''
+genai.configure(api_key="YOUR_API_KEY")
+model = genai.GenerativeModel("gemini-pro")
+
+with open("langgraph.md", "r") as f:
+    context = f.read()
+
+response = model.generate_content(
+    f"Context: {context}\n\nQuestion: How do I create a simple LangGraph?"
+)
+'''
 ```
 
 ## Command Line Options
